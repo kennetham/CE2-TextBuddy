@@ -92,11 +92,12 @@ public class TextBuddyPlusPlus {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		TextBuddy(args);
-		processUserCommands();
+		TextBuddyPlusPlus textbuddy = new TextBuddyPlusPlus();
+		textbuddy.TextBuddy(args);
+		textbuddy.processUserCommands();
 	}
 
-	private static void TextBuddy(String[] args) {
+	public static void TextBuddy(String[] args) {
 		/* Check for filename in program input parameter
 		 * If COMMAND equals to "TextBuddy", program is valid.
 		 * Else, program will exit because of invalid command.
@@ -181,7 +182,7 @@ public class TextBuddyPlusPlus {
 	 *
 	 * @throws IOException
 	 */
-	private static void processUserCommands() throws IOException {
+	public static void processUserCommands() throws IOException {
 		String print_out = "";
 
 		while(true) {
