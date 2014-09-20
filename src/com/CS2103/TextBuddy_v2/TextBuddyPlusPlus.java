@@ -279,7 +279,7 @@ public class TextBuddyPlusPlus {
 	 * @param _element      Input element to be added
 	 * @return              Success message when element added or error while saving
 	 */
-	private static String addElement(String _element) {
+	public static String addElement(String _element) {
 		list.add(_element);
 
 		boolean isFileSaveSuccessful = saveFile();
