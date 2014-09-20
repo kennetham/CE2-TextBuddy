@@ -43,14 +43,11 @@ public class TextBuddyTest {
 	public void initialize() throws IOException {
 		TextBuddyPlusPlus textbuddypp = new TextBuddyPlusPlus();
 		textbuddypp.TextBuddy(ARGS);
-		textbuddypp.processUserCommands();
 	}
 
-	// Search Empty
+	// Test Case: Search Empty
 	@Test
 	public void testSearchEmpty() throws IOException {
-		String output = textbuddypp.executeCommand("search ");
-		assertEquals("", textbuddypp.executeCommand("search "));
-		assertThat(output.isEmpty(), is(true));
+		assertEquals(null, TextBuddyPlusPlus.search(""));
 	}
 }
