@@ -31,6 +31,7 @@ import static org.hamcrest.CoreMatchers.*;
 import java.io.IOException;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TextBuddyTest {
@@ -39,8 +40,8 @@ public class TextBuddyTest {
 	private static final String[] ARGS = {APP_NAME, FILE_NAME};
 	private TextBuddyPlusPlus textbuddypp = new TextBuddyPlusPlus();
 
-	@Before
-	public void initialize() throws IOException {
+	@BeforeClass
+	public static void initialize() throws IOException {
 		TextBuddyPlusPlus textbuddypp = new TextBuddyPlusPlus();
 		textbuddypp.TextBuddy(ARGS);
 	}
@@ -54,6 +55,19 @@ public class TextBuddyTest {
 	// Test Case1: Search invalid keyword
 	@Test
 	public void testSearchInvalid() throws IOException {
-		assertEquals("\'a\': keyword could not be found.\n", TextBuddyPlusPlus.search("a"));
+		assertEquals("\'aaa\': keyword could not be found.\n", TextBuddyPlusPlus.search("aaa"));
+	}
+
+	// Test Case2: Search valid keywords
+	@Test
+	public void testSearchValid() throws IOException {
+		assertEquals("1. Meeting with Microsoft CEO at Headquarters, 2PM\n" +
+				"2. Meeting with Facebook CEO at Alto Palo, 6PM\n", TextBuddyPlusPlus.search("CEO"));
+	}
+
+	// Test Case3: Search random keywords
+	@Test
+	public void testSearchRandom() throws IOException {
+		assertEquals("1. Telepresence with Paypal Developer Team to discuss on policy management system, Thursday 5AM\n", TextBuddyPlusPlus.search("me"));
 	}
 }
