@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 /*
@@ -69,7 +70,8 @@ public class TextBuddyPlusPlus {
 	private static final String MSG_INVALID_ELEID = "Invalid element ID\n";
 	private static final String MSG_SEARCH_FAIL = "\'%s\': keyword could not be found.\n";
 	private static final String MSG_SEARCH_INVALID = "Search Invalid!";
-	private static final String MSG_SORT_SUCCESS = "Successfully Sorted! \"%s\"";
+	private static final String MSG_SORT_EMPTY = "\'%s\' is empty!\n";
+	private static final String MSG_SORT_SUCCESS = "List sorted successfully!";
 
 	// Points to current directory
 	private static final String CURRENT_DIRECTORY = System.getProperty("user.dir") + "/";
@@ -378,7 +380,7 @@ public class TextBuddyPlusPlus {
 	 * @return        File cleared successfully or error saving
 	 * @throws IOException
 	 */
-	private static String clearList() throws IOException {
+	public static String clearList() throws IOException {
 		list.clear();
 
 		boolean isFileSaveSuccessful = saveFile();
@@ -435,6 +437,11 @@ public class TextBuddyPlusPlus {
 	}
 
 	public static String sort() {
-		return null;
+		if (!list.isEmpty()) {
+			Collections.sort(list);
+			return MSG_SORT_SUCCESS;
+		} else {
+			return String.format(MSG_SORT_EMPTY, file_name);
+		}
 	}
 }
