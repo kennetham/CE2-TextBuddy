@@ -48,6 +48,6 @@ public class TextBuddyTest {
 	// Test Case: Search Empty
 	@Test
 	public void testSearchEmpty() throws IOException {
-		assertEquals(null, TextBuddyPlusPlus.search(""));
+		assertEquals("Search Invalid!", TextBuddyPlusPlus.search(""));
 	}
 }
