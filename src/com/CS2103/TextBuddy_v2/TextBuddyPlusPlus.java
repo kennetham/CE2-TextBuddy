@@ -1,6 +1,8 @@
 package com.CS2103.TextBuddy_v2;
 
 import java.text.SimpleDateFormat;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -50,9 +52,7 @@ import java.util.Date;
  */
 
 import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.StringTokenizer;
 
 public class TextBuddyPlusPlus {
 	private static final String APP_COMMAND = "TextBuddy";
@@ -67,6 +67,9 @@ public class TextBuddyPlusPlus {
 	private static final String MSG_ERROR_READING = "Error encountered when reading %s\n";
 	private static final String MSG_INVALID_COMMAND = "Invalid command!\n";
 	private static final String MSG_INVALID_ELEID = "Invalid element ID\n";
+	private static final String MSG_SEARCH_FAIL = "%s is not found.";
+	private static final String MSG_SEARCH_INVALID = "Search invalid!";
+	private static final String MSG_SORT_SUCCESS = "Successfully sorted! \"%s\"";
 
 	// Points to current directory
 	private static final String CURRENT_DIRECTORY = System.getProperty("user.dir") + "/";
@@ -78,7 +81,7 @@ public class TextBuddyPlusPlus {
 
 	// Enumerated types of command
 	enum COMMAND_TYPE {
-		DISPLAY, ADD, DELETE, CLEAR, INVALID, EXIT
+		DISPLAY, ADD, DELETE, CLEAR, SORT, SEARCH, INVALID, EXIT
 	};
 
 	private static final ArrayList<String> list = new ArrayList<String>();
@@ -92,12 +95,12 @@ public class TextBuddyPlusPlus {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		TextBuddyPlusPlus textbuddy = new TextBuddyPlusPlus();
-		textbuddy.TextBuddy(args);
-		textbuddy.processUserCommands();
+		TextBuddyPlusPlus textbuddypp = new TextBuddyPlusPlus();
+		textbuddypp.TextBuddy(args);
+		textbuddypp.processUserCommands();
 	}
 
-	public static void TextBuddy(String[] args) {
+	public static void TextBuddy(String[] args) throws ArrayIndexOutOfBoundsException {
 		/* Check for filename in program input parameter
 		 * If COMMAND equals to "TextBuddy", program is valid.
 		 * Else, program will exit because of invalid command.
@@ -106,14 +109,14 @@ public class TextBuddyPlusPlus {
 			if(!args[0].equals(APP_COMMAND)){
 				print(MSG_INVALID_COMMAND);
 				System.exit(0);
-			} else if (args.length < 2) {
-				print(MSG_INVALID_COMMAND);
-				System.exit(0);
 			} else {
 				file_name = args[1];
 				checkIfFileExists();
 				print(String.format(MSG_WELCOME, CURRENT_DIRECTORY + file_name));
 			}
+		} else if (args.length == 0 || args.length < 2) {
+			print(MSG_INVALID_COMMAND);
+			System.exit(0);
 		} else {
 			file_name = getDateTime().concat(TXT_EXTENSION);
 		}
@@ -213,6 +216,12 @@ public class TextBuddyPlusPlus {
 						print_out = clearList();
 						break;
 
+					case SORT :
+						break;
+
+					case SEARCH :
+						break;
+
 					case EXIT :
 						System.exit(0);
 						break;
@@ -227,6 +236,47 @@ public class TextBuddyPlusPlus {
 
 			print(print_out);
 		}
+	}
+
+	public static String executeCommand(String cmd) throws IOException {
+		String textInput = removeCommandType(cmd);
+//		String cmd_type = getFirstCommand(cmd.toUpperCase());
+		COMMAND_TYPE cmd_type = determineCommandType(cmd);
+
+		switch (cmd_type) {
+			case DISPLAY :
+				return displayFile();
+
+			case ADD :
+				return addElement(textInput);
+
+			case DELETE :
+				return deleteElement(textInput);
+
+			case CLEAR :
+				return clearList();
+
+			case SORT :
+				return sort();
+
+			case SEARCH :
+				return search(textInput);
+
+			case EXIT :
+				System.exit(0);
+
+			default :
+				throw new Error(MSG_INVALID_COMMAND);
+		}
+	}
+
+	private static String getFirstCommand(String cmd_in) {
+		StringTokenizer cmd_token = new StringTokenizer(cmd_in);
+		return cmd_token.nextToken();
+	}
+
+	private static String removeCommandType(String cmd_in) {
+		return cmd_in.replace(getFirstCommand(cmd_in), "").trim();
 	}
 
 	/**
@@ -248,6 +298,10 @@ public class TextBuddyPlusPlus {
 			return COMMAND_TYPE.DELETE;
 		} else if (command_type_str.equalsIgnoreCase("clear")) {
 			return COMMAND_TYPE.CLEAR;
+		} else if (command_type_str.equalsIgnoreCase("sort")) {
+			return COMMAND_TYPE.SORT;
+		} else if (command_type_str.equalsIgnoreCase("search")) {
+			return COMMAND_TYPE.SEARCH;
 		} else if (command_type_str.equalsIgnoreCase("exit") || command_type_str.equalsIgnoreCase("quit") || command_type_str.equalsIgnoreCase("q")) {
 			return COMMAND_TYPE.EXIT;
 		} else {
@@ -392,5 +446,18 @@ public class TextBuddyPlusPlus {
 
 	private static void print(String output) {
 		System.out.print(output);
+	}
+
+	/**
+	 * Method to find lines with a particular keyword
+	 *
+	 * @param param   Keyword to be searched for
+	 */
+	public static String search(String param) {
+		return null;
+	}
+
+	public static String sort() {
+		return null;
 	}
 }
