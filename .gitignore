@@ -1,6 +1,7 @@
 *.class
 *.iml
 *.xml
+*.txt
 
 *.idea/
 
