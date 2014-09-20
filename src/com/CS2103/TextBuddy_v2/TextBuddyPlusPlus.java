@@ -1,7 +1,7 @@
 package com.CS2103.TextBuddy_v2;
 
 import java.text.SimpleDateFormat;
-import java.io.File;
+import java.io.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,6 +42,8 @@ import java.util.Date;
  * The 'add' command adds a new specified string into the text file.
  * The 'delete' command deletes a particular string from the file, specified by the user as the number position of the string in the text file.
  * The 'clear' command deletes all strings from the text file.
+ * The 'sort' command sorts the entire file in alphabetical order.
+ * The 'search' command searches for any particular keyword in the list of items stored.
  * The 'exit' command exits user from the program.
  *
  * This program will save all updated content back into the user's original file after each command user chooses to execute.
@@ -51,9 +53,6 @@ import java.util.Date;
  * 2. Attempt to delete an element of ID smaller than 0 or
  *    greater than the list size will result in an "Invalid Element ID"
  */
-
-import java.io.*;
-import java.util.StringTokenizer;
 
 public class TextBuddyPlusPlus {
 	private static final String APP_COMMAND = "TextBuddy";
@@ -81,14 +80,14 @@ public class TextBuddyPlusPlus {
 	private static final boolean FILE_SAVE_SUCCESSFUL = true;
 	private static final boolean FILE_SAVE_UNSUCCESSFUL = false;
 
+	private static final ArrayList<String> list = new ArrayList<String>();
+	private static final BufferedReader buffered_reader = new BufferedReader(new InputStreamReader(System.in));
+	private static String file_name;
+
 	// Enumerated types of command
 	enum COMMAND_TYPE {
 		DISPLAY, ADD, DELETE, CLEAR, SORT, SEARCH, INVALID, EXIT
 	};
-
-	private static final ArrayList<String> list = new ArrayList<String>();
-	private static final BufferedReader buffered_reader = new BufferedReader(new InputStreamReader(System.in));
-	private static String file_name;
 
 	/**
 	 * Initialize TextBuddy
@@ -182,6 +181,8 @@ public class TextBuddyPlusPlus {
 	 * ADD: adds a line to the file
 	 * DELETE: delete a line from the file
 	 * CLEAR: clear the entire file
+	 * SORT: sorts the entire file
+	 * SEARCH: search the list of items from a keyword
 	 * EXIT: exit the program
 	 * INVALID COMMAND: anything that doesn't resemble the commands above
 	 *
@@ -270,6 +271,46 @@ public class TextBuddyPlusPlus {
 		} else {
 			return COMMAND_TYPE.INVALID;
 		}
+	}
+
+	/**
+	 * search:
+	 * Search lines with a particular keyword
+	 *
+	 * @param param   Keyword to be searched for
+	 * @return        Success or fail messsage
+	 */
+	public static String search(String param) {
+		String str_result = "";
+		int count = 1;
+
+		if (param == null || param.trim().length() == 0) {
+			return MSG_SEARCH_INVALID;
+		}
+
+		for (String item : list) {
+			if (item.contains(param)) {
+				str_result += count + ". " + item + "\n";
+				count++;
+			}
+		}
+
+		if (str_result.length() == 0) {
+			return String.format(MSG_SEARCH_FAIL, param);
+		} else { return str_result; }
+	}
+
+	/**
+	 * sort:
+	 * sort in alphabetical order
+	 *
+	 */
+	public static String sort() {
+		if (!list.isEmpty()) {
+			Collections.sort(list);
+
+			return MSG_SORT_SUCCESS;
+		} else { return String.format(MSG_SORT_EMPTY, file_name); }
 	}
 
 	/**
@@ -409,39 +450,5 @@ public class TextBuddyPlusPlus {
 
 	private static void print(String output) {
 		System.out.print(output);
-	}
-
-	/**
-	 * Method to find lines with a particular keyword
-	 *
-	 * @param param   Keyword to be searched for
-	 */
-	public static String search(String param) {
-		String str_result = "";
-		int count = 1;
-
-		if (param == null || param.trim().length() == 0) {
-			return MSG_SEARCH_INVALID;
-		}
-
-		for (String item : list) {
-			if (item.contains(param)) {
-				str_result += count + ". " + item + "\n";
-				count++;
-			}
-		}
-
-		if (str_result.length() == 0) {
-			return String.format(MSG_SEARCH_FAIL, param);
-		} else { return str_result; }
-	}
-
-	public static String sort() {
-		if (!list.isEmpty()) {
-			Collections.sort(list);
-			return MSG_SORT_SUCCESS;
-		} else {
-			return String.format(MSG_SORT_EMPTY, file_name);
-		}
 	}
 }
