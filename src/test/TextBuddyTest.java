@@ -115,7 +115,7 @@ public class TextBuddyTest {
 	@Test
 	public void testSortAZOrder() throws IOException {
 		TextBuddyPlusPlus.clearList();
-		
+
 		TextBuddyPlusPlus.addElement("watermelon");
 		TextBuddyPlusPlus.addElement("honeydew");
 		TextBuddyPlusPlus.addElement("apple");
