@@ -465,3 +465,78 @@ public class TextBuddyPlusPlus {
 		return null;
 	}
 }
+
+class Contents {
+	private final String REGEX_SPLIT_CONTENT = " ";
+	private String content = "";
+	private ArrayList<String> keywords = new ArrayList<String>();
+
+	/**
+	 * Method that overrides the default Object toString method. This class has
+	 * a special method to derive its string representation
+	 *
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return this.content;
+	}
+
+	/**
+	 * Method to implement the String.compareTo method on this class
+	 *
+	 * @see java.lang.String#compareTo()
+	 *
+	 * @param value   Contents value to be compared with
+	 */
+	public int compareTo(Contents value) {
+		return this.content.compareTo(value.toString());
+	}
+
+	/**
+	 * Method to implement the String.compareToIgnoreCase method on this class
+	 *
+	 * @see java.lang.String#compareToIgnoreCase()
+	 *
+	 * @param value   Contents value to be compared with
+	 */
+	public int compareToIgnoreCase(Contents value) {
+		return this.content.compareToIgnoreCase(value.toString());
+	}
+
+	/**
+	 * Method to initialize the keywords of a Contents object
+	 *
+	 * @param content   String to be stored as keywords
+	 */
+	private void initializeKeywords(String content) {
+		String[] pieces = content.split(REGEX_SPLIT_CONTENT);
+		for (String i : pieces) {
+			this.keywords.add(i.toLowerCase());
+		}
+	}
+
+	/**
+	 * Contents Default Constructor
+	 *
+	 * @param content   Content to be associated with a Contents Object
+	 */
+	public Contents(String content) {
+		this.content = content;
+		initializeKeywords(content);
+	}
+
+	/**
+	 * Method to check if a Contents object contains a specific word.
+	 *
+	 * @param word    Word to check in the Contents object
+	 * @return True if the Contents object contains the word; False otherwise
+	 */
+	public boolean hasKeyword(String word) {
+		if (keywords.contains(word.toLowerCase())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+}
