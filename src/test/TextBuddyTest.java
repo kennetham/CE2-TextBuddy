@@ -110,4 +110,31 @@ public class TextBuddyTest {
 		TextBuddyPlusPlus.clearList();
 		assertEquals("\'in.txt\' is empty!\n", TextBuddyPlusPlus.sort());
 	}
+
+	// Test Sort Case 1: Sort Alphabetical Order
+	@Test
+	public void testSortAZOrder() throws IOException {
+		TextBuddyPlusPlus.clearList();
+		
+		TextBuddyPlusPlus.addElement("watermelon");
+		TextBuddyPlusPlus.addElement("honeydew");
+		TextBuddyPlusPlus.addElement("apple");
+		TextBuddyPlusPlus.addElement("strawberry");
+		TextBuddyPlusPlus.addElement("melon");
+		TextBuddyPlusPlus.addElement("orange");
+		TextBuddyPlusPlus.addElement("banana");
+		TextBuddyPlusPlus.addElement("promegranate");
+		TextBuddyPlusPlus.addElement("coconut");
+		TextBuddyPlusPlus.addElement("raspberry");
+		TextBuddyPlusPlus.addElement("lychee");
+		TextBuddyPlusPlus.addElement("blueberry");
+		TextBuddyPlusPlus.addElement("avocado");
+		TextBuddyPlusPlus.addElement("kumquat");
+		TextBuddyPlusPlus.addElement("currant");
+		TextBuddyPlusPlus.addElement("tomato");
+		TextBuddyPlusPlus.addElement("grapefruit");
+		TextBuddyPlusPlus.addElement("cranberry");
+
+		assertEquals("List sorted successfully!\n", TextBuddyPlusPlus.sort());
+	}
 }
