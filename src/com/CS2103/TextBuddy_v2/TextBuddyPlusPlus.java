@@ -240,6 +240,38 @@ public class TextBuddyPlusPlus {
 		}
 	}
 
+	public static String executeCommand(String cmd) throws IOException {
+		String textInput = removeCommandType(cmd);
+//		String cmd_type = getFirstCommand(cmd.toUpperCase());
+		COMMAND_TYPE cmd_type = determineCommandType(cmd);
+
+		switch (cmd_type) {
+			case DISPLAY :
+				return displayFile();
+
+			case ADD :
+				return addElement(textInput);
+
+			case DELETE :
+				return deleteElement(textInput);
+
+			case CLEAR :
+				return clearList();
+
+			case SORT :
+				return sort();
+
+			case SEARCH :
+				return search(textInput);
+
+			case EXIT :
+				System.exit(0);
+
+			default :
+				throw new Error(MSG_INVALID_COMMAND);
+		}
+	}
+
 	private static String getFirstCommand(String cmd_in) {
 		StringTokenizer cmd_token = new StringTokenizer(cmd_in);
 		return cmd_token.nextToken();
