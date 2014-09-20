@@ -70,4 +70,16 @@ public class TextBuddyTest {
 	public void testSearchRandom() throws IOException {
 		assertEquals("1. Telepresence with Paypal Developer Team to discuss on policy management system, Thursday 5AM\n", TextBuddyPlusPlus.search("me"));
 	}
+
+	// Test Case4: Search case-sensitive keywords
+	@Test
+	public void testSearchCaseSensitive() throws IOException {
+		assertEquals("\'ceo\': keyword could not be found.\n", TextBuddyPlusPlus.search("ceo"));
+	}
+
+	// Test Case5: Search case-sensitive keywords
+	@Test
+	public void testSearchCaseSensitive2() throws IOException {
+		assertEquals("\'meeting\': keyword could not be found.\n", TextBuddyPlusPlus.search("meeting"));
+	}
 }
