@@ -67,7 +67,7 @@ public class TextBuddyPlusPlus {
 	private static final String MSG_ERROR_READING = "Error encountered when reading %s\n";
 	private static final String MSG_INVALID_COMMAND = "Invalid command!\n";
 	private static final String MSG_INVALID_ELEID = "Invalid element ID\n";
-	private static final String MSG_SEARCH_FAIL = "%s is not found.";
+	private static final String MSG_SEARCH_FAIL = "\'%s\': keyword could not be found.\n";
 	private static final String MSG_SEARCH_INVALID = "Search Invalid!";
 	private static final String MSG_SORT_SUCCESS = "Successfully Sorted! \"%s\"";
 
@@ -456,87 +456,19 @@ public class TextBuddyPlusPlus {
 	 * @param param   Keyword to be searched for
 	 */
 	public static String search(String param) {
+		String str_result = "";
+		int count = 1;
+
 		if (param == null || param.trim().length() == 0) {
 			return MSG_SEARCH_INVALID;
-		} else { return null; }
+		}
+
+		if (str_result.length() == 0) {
+			return String.format(MSG_SEARCH_FAIL, param);
+		} else { return str_result; }
 	}
 
 	public static String sort() {
 		return null;
-	}
-}
-
-class Contents {
-	private final String REGEX_SPLIT_CONTENT = " ";
-	private String content = "";
-	private ArrayList<String> keywords = new ArrayList<String>();
-
-	/**
-	 * Method that overrides the default Object toString method. This class has
-	 * a special method to derive its string representation
-	 *
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return this.content;
-	}
-
-	/**
-	 * Method to implement the String.compareTo method on this class
-	 *
-	 * @see java.lang.String#compareTo()
-	 *
-	 * @param value   Contents value to be compared with
-	 */
-	public int compareTo(Contents value) {
-		return this.content.compareTo(value.toString());
-	}
-
-	/**
-	 * Method to implement the String.compareToIgnoreCase method on this class
-	 *
-	 * @see java.lang.String#compareToIgnoreCase()
-	 *
-	 * @param value   Contents value to be compared with
-	 */
-	public int compareToIgnoreCase(Contents value) {
-		return this.content.compareToIgnoreCase(value.toString());
-	}
-
-	/**
-	 * Method to initialize the keywords of a Contents object
-	 *
-	 * @param content   String to be stored as keywords
-	 */
-	private void initializeKeywords(String content) {
-		String[] pieces = content.split(REGEX_SPLIT_CONTENT);
-		for (String i : pieces) {
-			this.keywords.add(i.toLowerCase());
-		}
-	}
-
-	/**
-	 * Contents Default Constructor
-	 *
-	 * @param content   Content to be associated with a Contents Object
-	 */
-	public Contents(String content) {
-		this.content = content;
-		initializeKeywords(content);
-	}
-
-	/**
-	 * Method to check if a Contents object contains a specific word.
-	 *
-	 * @param word    Word to check in the Contents object
-	 * @return True if the Contents object contains the word; False otherwise
-	 */
-	public boolean hasKeyword(String word) {
-		if (keywords.contains(word.toLowerCase())) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 }
