@@ -463,13 +463,6 @@ public class TextBuddyPlusPlus {
 			return MSG_SEARCH_INVALID;
 		}
 
-		for (String item : list) {
-			if (item.contains(param)) {
-				str_result += count + ". " + item + "\n";
-				count++;
-			}
-		}
-
 		if (str_result.length() == 0) {
 			return String.format(MSG_SEARCH_FAIL, param);
 		} else { return str_result; }
