@@ -38,7 +38,6 @@ public class TextBuddyTest {
 	private static final String APP_NAME = "TextBuddy";
 	private static final String FILE_NAME = "in.txt";
 	private static final String[] ARGS = {APP_NAME, FILE_NAME};
-	private TextBuddyPlusPlus textbuddypp = new TextBuddyPlusPlus();
 
 	@BeforeClass
 	public static void initialize() throws IOException {
@@ -46,40 +45,46 @@ public class TextBuddyTest {
 		textbuddypp.TextBuddy(ARGS);
 	}
 
-	// Test Case: Search Empty
+	// Test Search Case: Search Empty
 	@Test
 	public void testSearchEmpty() throws IOException {
 		assertEquals("Search Invalid!", TextBuddyPlusPlus.search(""));
 	}
 
-	// Test Case1: Search invalid keyword
+	// Test Search Case 1: Search invalid keyword
 	@Test
 	public void testSearchInvalid() throws IOException {
 		assertEquals("\'aaa\': keyword could not be found.\n", TextBuddyPlusPlus.search("aaa"));
 	}
 
-	// Test Case2: Search valid keywords
+	// Test Search Case 2: Search valid keywords
 	@Test
 	public void testSearchValid() throws IOException {
 		assertEquals("1. Meeting with Microsoft CEO at Headquarters, 2PM\n" +
-				"2. Meeting with Facebook CEO at Alto Palo, 6PM\n", TextBuddyPlusPlus.search("CEO"));
+								 "2. Meeting with Facebook CEO at Alto Palo, 6PM\n", TextBuddyPlusPlus.search("CEO"));
 	}
 
-	// Test Case3: Search random keywords
+	// Test Search Case 3: Search random keywords
 	@Test
 	public void testSearchRandom() throws IOException {
 		assertEquals("1. Telepresence with Paypal Developer Team to discuss on policy management system, Thursday 5AM\n", TextBuddyPlusPlus.search("me"));
 	}
 
-	// Test Case4: Search case-sensitive keywords
+	// Test Search Case 4: Search case-sensitive keywords
 	@Test
 	public void testSearchCaseSensitive() throws IOException {
 		assertEquals("\'ceo\': keyword could not be found.\n", TextBuddyPlusPlus.search("ceo"));
 	}
 
-	// Test Case5: Search case-sensitive keywords
+	// Test Search Case 5: Search case-sensitive keywords
 	@Test
 	public void testSearchCaseSensitive2() throws IOException {
 		assertEquals("\'meeting\': keyword could not be found.\n", TextBuddyPlusPlus.search("meeting"));
+	}
+
+	// Test Sort Case: Sort Empty
+	@Test
+	public void testSortEmpty() throws IOException {
+		assertEquals("\'in.txt\' is empty!\n", TextBuddyPlusPlus.sort());
 	}
 }
