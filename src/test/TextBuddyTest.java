@@ -30,6 +30,7 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import java.io.IOException;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -43,6 +44,21 @@ public class TextBuddyTest {
 	public static void initialize() throws IOException {
 		TextBuddyPlusPlus textbuddypp = new TextBuddyPlusPlus();
 		textbuddypp.TextBuddy(ARGS);
+	}
+
+	// Test Add Elements case: Always add items before each test
+	@Before
+	public void testAddElements() throws IOException {
+		TextBuddyPlusPlus.addElement("Meeting with Microsoft CEO at Headquarters, 2PM");
+		TextBuddyPlusPlus.addElement("Meeting with Facebook CEO at Alto Palo, 6PM");
+		TextBuddyPlusPlus.addElement("Conference call with Google Developer Team, Wednesday 3AM");
+		TextBuddyPlusPlus.addElement("Telepresence with Paypal Developer Team to discuss on policy management system, Thursday 5AM");
+	}
+
+	// Test Clear Elements Case: Always clear items after each test
+	@After
+	public void testClearList() throws IOException {
+		assertEquals("all content deleted from in.txt\n", TextBuddyPlusPlus.clearList());
 	}
 
 	// Test Search Case: Search Empty
@@ -82,9 +98,16 @@ public class TextBuddyTest {
 		assertEquals("\'meeting\': keyword could not be found.\n", TextBuddyPlusPlus.search("meeting"));
 	}
 
+	// Test Clear Case: Clear the list
+	@After
+	public void testClear() throws IOException {
+		assertEquals("all content deleted from in.txt\n", TextBuddyPlusPlus.clearList());
+	}
+
 	// Test Sort Case: Sort Empty
 	@Test
 	public void testSortEmpty() throws IOException {
+		TextBuddyPlusPlus.clearList();
 		assertEquals("\'in.txt\' is empty!\n", TextBuddyPlusPlus.sort());
 	}
 }
