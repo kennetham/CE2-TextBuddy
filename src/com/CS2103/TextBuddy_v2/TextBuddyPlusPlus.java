@@ -71,7 +71,7 @@ public class TextBuddyPlusPlus {
 	private static final String MSG_SEARCH_FAIL = "\'%s\': keyword could not be found.\n";
 	private static final String MSG_SEARCH_INVALID = "Search Invalid!";
 	private static final String MSG_SORT_EMPTY = "\'%s\' is empty!\n";
-	private static final String MSG_SORT_SUCCESS = "List sorted successfully!";
+	private static final String MSG_SORT_SUCCESS = "List sorted successfully!\n";
 
 	// Points to current directory
 	private static final String CURRENT_DIRECTORY = System.getProperty("user.dir") + "/";
