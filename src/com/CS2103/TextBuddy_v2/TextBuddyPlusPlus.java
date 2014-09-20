@@ -217,9 +217,11 @@ public class TextBuddyPlusPlus {
 						break;
 
 					case SORT :
+						print_out = sort();
 						break;
 
 					case SEARCH :
+						print_out = search(cmd[1]);
 						break;
 
 					case EXIT :
