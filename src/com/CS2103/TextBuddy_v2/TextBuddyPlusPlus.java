@@ -68,8 +68,8 @@ public class TextBuddyPlusPlus {
 	private static final String MSG_INVALID_COMMAND = "Invalid command!\n";
 	private static final String MSG_INVALID_ELEID = "Invalid element ID\n";
 	private static final String MSG_SEARCH_FAIL = "%s is not found.";
-	private static final String MSG_SEARCH_INVALID = "Search invalid!";
-	private static final String MSG_SORT_SUCCESS = "Successfully sorted! \"%s\"";
+	private static final String MSG_SEARCH_INVALID = "Search Invalid!";
+	private static final String MSG_SORT_SUCCESS = "Successfully Sorted! \"%s\"";
 
 	// Points to current directory
 	private static final String CURRENT_DIRECTORY = System.getProperty("user.dir") + "/";
@@ -456,7 +456,9 @@ public class TextBuddyPlusPlus {
 	 * @param param   Keyword to be searched for
 	 */
 	public static String search(String param) {
-		return null;
+		if (param == null || param.trim().length() == 0) {
+			return MSG_SEARCH_INVALID;
+		} else { return null; }
 	}
 
 	public static String sort() {
