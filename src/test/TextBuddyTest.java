@@ -28,23 +28,29 @@ package test;
 import com.CS2103.TextBuddy_v2.*;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
-
 import java.io.IOException;
-import java.util.List;
 
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
-/**
- * Created by kennetham on 18/09/14.
- */
 public class TextBuddyTest {
 	private static final String APP_NAME = "TextBuddy";
 	private static final String FILE_NAME = "in.txt";
-	private static final String[] args = {APP_NAME, FILE_NAME};
+	private static final String[] ARGS = {APP_NAME, FILE_NAME};
+	private TextBuddyPlusPlus textbuddypp = new TextBuddyPlusPlus();
 
+	@Before
+	public void initialize() throws IOException {
+		TextBuddyPlusPlus textbuddypp = new TextBuddyPlusPlus();
+		textbuddypp.TextBuddy(ARGS);
+		textbuddypp.processUserCommands();
+	}
+
+	// Search Empty
 	@Test
-	public void testFailCase() {
-		fail("Not Implemented");
+	public void testSearchEmpty() throws IOException {
+		String output = textbuddypp.executeCommand("search ");
+		assertEquals("", textbuddypp.executeCommand("search "));
+		assertThat(output.isEmpty(), is(true));
 	}
 }
