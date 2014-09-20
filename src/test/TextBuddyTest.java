@@ -50,4 +50,10 @@ public class TextBuddyTest {
 	public void testSearchEmpty() throws IOException {
 		assertEquals("Search Invalid!", TextBuddyPlusPlus.search(""));
 	}
+
+	// Test Case1: Search invalid keyword
+	@Test
+	public void testSearchInvalid() throws IOException {
+		assertEquals("\'a\': keyword could not be found.\n", TextBuddyPlusPlus.search("a"));
+	}
 }
